@@ -5,6 +5,6 @@ const articleControllerClass = require('../controllers/article.js')
 const articleController = new(articleControllerClass)
 
 router.get('/', (req, res) => articleController.getAllArticles(req, res))
-router.get('/:slug', articleController.getArticleBySlug)
+router.get('/article/:slug', (req, res) => articleController.getArticleBySlug(req, res))
 
 module.exports = router;

@@ -30,3 +30,29 @@ class BaseSQLModel {
         const results = await this.executeQuery(query)
         return results
     }
+
+    async function findOne(where, value){
+        const query = `SELECT * FROM ${this.tableName} WHERE id = ?`
+        const results = await this.executeQuery(query, [where, data])
+        return results[0]
+    }
+
+    async function create(data){
+        const query = `INSERT INTO ${this.tableName} WHERE ${where}="${value}"`
+        const result = await this.executeQuery(query, data)
+        return results.insertId
+    }
+
+    async function update(id, data){
+        const query = `UPDATE ${this.tableName} SET ? WHERE id = ?`
+        const result = await this.executeQuery(query, [data, id])
+        return result.affectedRows
+    }
+
+    async function deleteByID(id) {
+        const query = `DELETE FROM ${this.tableName} WHERE id = ?`
+        const result = await this.executeQuery(query, [id])
+        return result.affectedRows
+    }
+
+module.exports = BaseSQLModel

@@ -4,15 +4,13 @@ const mysql = require('mysql2')
 const app = Express()
 
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
 
-const articleRoutes = require('./routes/article.js')
+const articleControllerClass = require('./controllers/article.js')
+const articleController = new(articleControllerClass)
 
+const articleRoutes = require('./routes/article')
 app.use('/', articleRoutes)
-app.use('/article', articleRoutes)
-
-const authorRoutes = require('./routes/author.js')
-
-app.use('/author', authorRoutes)
 
 app.listen(3001, () =>{
     console.log('app is at http://localhost:3001')

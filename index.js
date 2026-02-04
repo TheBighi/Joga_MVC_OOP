@@ -1,6 +1,4 @@
 const Express = require("express")
-const path = require('path')
-const mysql = require('mysql2')
 const app = Express()
 const bodyParser = require('body-parser')
 

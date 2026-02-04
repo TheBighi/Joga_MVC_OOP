@@ -1,5 +1,5 @@
 const articleDbModel = require('../models/article')
-const articleModel = new(articleDbModel)
+const articleModel = new articleDbModel()
 
 class articleController {
     constructor(){

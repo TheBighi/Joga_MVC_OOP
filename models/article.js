@@ -15,8 +15,8 @@ class ArticleModel extends BaseSQLModel {
         return article
     }
 
-    async findMany(slug){
-        const article = await super.findMany('slug', slug)
+    async findMany(author_id){
+        const article = await super.findMany('author_id', author_id)
         return article
     }
 }

@@ -17,48 +17,54 @@ class BaseSQLModel {
             })
         })
         }
-    }
+    
 
-    async function findAll(){
+    async findAll(){
         const query = `SELECT * FROM ${this.tableName}`;
         const results = await this.executeQuery(query)
         return results
     }
 
-    async function findById(id){
+    async findById(id){
+        console.log('findById called with id:', id, 'type:', typeof id)
         const query = `SELECT * FROM ${this.tableName} WHERE id = ?`
-        const results = await this.executeQuery(query)
-        return results
-    }
-
-    async function findOne(where, value){
-        const query = `SELECT * FROM ${this.tableName} WHERE id = ?`
-        const results = await this.executeQuery(query, [where, data])
+        console.log('SQL query:', query)
+        const results = await this.executeQuery(query, [id])
+        console.log('Query results:', results)
         return results[0]
     }
 
-    async function findMany(where, value){
-        const query = `SELECT * FROM ${this.tableName} WHERE author_id = ?`
-        const results = await this.executeQuery(query, [where, data])
+
+    async findOne(where, value){
+        const query = `SELECT * FROM ${this.tableName} WHERE ${where} = '${value}'`
+        const results = await this.executeQuery(query, [where, value])
+        return results[0]
+    }
+
+    async findMany(where, value){
+        const query = `SELECT * FROM ${this.tableName} WHERE ${where} = ${value}`
+        console.log(query)
+        const results = await this.executeQuery(query, [where, value])
         return results
     }
 
-    async function create(data){
+    async create(data){
         const query = `INSERT INTO ${this.tableName} WHERE ${where}="${value}"`
         const result = await this.executeQuery(query, data)
         return results.insertId
     }
 
-    async function update(id, data){
+    async update(id, data){
         const query = `UPDATE ${this.tableName} SET ? WHERE id = ?`
         const result = await this.executeQuery(query, [data, id])
         return result.affectedRows
     }
 
-    async function deleteByID(id) {
+    async deleteByID(id) {
         const query = `DELETE FROM ${this.tableName} WHERE id = ?`
         const result = await this.executeQuery(query, [id])
         return result.affectedRows
     }
 
+}
 module.exports = BaseSQLModel

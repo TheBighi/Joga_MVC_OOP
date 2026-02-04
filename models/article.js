@@ -1,14 +1,24 @@
 const BaseSQLModel = require('./base')
 
-class AuthorModel extends BaseSQLModel {
+class ArticleModel extends BaseSQLModel {
     constructor(){
         super('article')
     }
 
-    async findMany(author_id){
-        const articles = await super.findMany('author_id', author_id)
+    async findAll(){
+        const articles = await super.findAll()
         return articles
+    }
+
+    async findOne(slug){
+        const article = await super.findOne('slug', slug)
+        return article
+    }
+
+    async findMany(slug){
+        const article = await super.findMany('slug', slug)
+        return article
     }
 }
 
-module.exports = AuthorModel
+module.exports = ArticleModel

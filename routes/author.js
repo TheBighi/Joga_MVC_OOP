@@ -1,9 +1,9 @@
 const express = require('express')
-
 const router = express.Router()
 
-const authorController = require('../controllers/author.js')
+const authorControllerClass = require('../controllers/author')
+const authorController = new(authorControllerClass)
 
-router.get('/:author_id', authorController.getArticlesByAuthor)
+router.get('/author/:author_id', authorController.getAuthorById(req, res))
 
 module.exports = router

@@ -43,15 +43,16 @@ class BaseSQLModel {
 
     async findMany(where, value){
         const query = `SELECT * FROM ${this.tableName} WHERE ${where} = ${value}`
-        console.log(query)
         const results = await this.executeQuery(query, [where, value])
         return results
     }
 
     async create(data){
-        const query = `INSERT INTO ${this.tableName} WHERE ${where}="${value}"`
-        const result = await this.executeQuery(query, data)
-        return results.insertId
+        const query = `INSERT INTO ${this.tableName} SET ?`
+        console.log(query)
+        const result = await this.executeQuery(query, [data])
+        console.log('Created succesfully')
+        return result.insertId
     }
 
     async update(id, data){
